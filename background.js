@@ -5,7 +5,6 @@ chrome.runtime.onInstalled.addListener(() => {
 })
 
 let youtubeRegex = "^(https?://)?(www.youtube.com|youtu.?be)/.+$"
-
 let youtubeRule = {
   conditions: [
     new chrome.declarativeContent.PageStateMatcher({
