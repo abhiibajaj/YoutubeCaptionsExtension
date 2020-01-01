@@ -2,7 +2,7 @@
   "name": "Youtube Caption Searcher",
   "version": "1.0.0",
   "description": "Search youtube videos based on their content",
-  "permissions": ["storage"],
+  "permissions": ["storage", "declarativeContent"],
   "background": {
     "scripts": ["background.js"],
     "persistent": false
