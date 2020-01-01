@@ -22,23 +22,19 @@ document.querySelector("button").addEventListener("click", function() {
         async: true,
         headers: {
           Authorization: "Bearer " + token,
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*"
+          "Content-Type": "application/json"
         },
         contentType: "json"
       }
 
       let proxyUrl = "https://cors-anywhere.herokuapp.com/"
       let youtubeUrl =
-        "https://www.googleapis.com/youtube/v3/captions/[TR3Vdo5etCQ&list=RDIBH97ma9YiI]?key=[" +
-        gAPI +
-        "]"
-      fetch(proxyUrl + youtubeUrl)
+        "https://www.googleapis.com/youtube/v3/activities?part=snippet%2CcontentDetails&channelId=UC_x5XG1OV2P6uZZ5FSM9Ttw&maxResults=25&key=[AIzaSyD-XYTzGnBj6t8b1qn7DV3uYgR0Tt0-Jk0]"
+      fetch(youtubeUrl, init)
         .then(response => response.json())
         .then(function(data) {
           console.log(data)
         })
-        .catch(() => console.log("Can't access things"))
     } else {
       //THROW SOME EXCEPTION
     }
