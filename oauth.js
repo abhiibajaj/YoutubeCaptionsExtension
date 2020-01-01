@@ -1,0 +1,2 @@
+var GoogleAuth
+function initClient() {}
