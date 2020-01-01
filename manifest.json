@@ -25,8 +25,12 @@
   },
   "oauth2": {
     "client_id": "761602148351-3apgepm3012qmjs950549n6r3o55vb8p.apps.googleusercontent.com",
-    "scopes": ["https://www.googleapis.com/auth/youtube.readonly"]
+    "scopes": [
+      "https://www.googleapis.com/auth/youtube.force-ssl",
+      "https://www.googleapis.com/auth/youtubepartner"
+    ]
   },
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAz8ob2bBKbZMjvxc1sI1GXJ4zt7+RDSCn/CZcLPE6n8raZ31qRtcmRghLtfQllxcHV2PcxvOti4s/1a9VzsaIiejFpMOyMaTw8XoIQLwrXk3SeO6DLKdGYb3GAWXUf4plwu2+ablAkilqmxYTd6tXZ1yBEUrv5QlijrGN96i25PLt+SlukCuvguf12u4oeZsOXwIy4fhoci18HIFX6lMcL/nYH0ZouSUJnZ7qKprkjgVwZVHJ1IoLyCnbhyJtWqmYeP4wSq+CgPh3JsWPZ7mSPtYwh0dAaQd2v+MUu+4uSm3FYdg7QMbarAPg7G7FoYLukIjZjKX98zKnNUaiFZyFEQIDAQAB",
+  "content_security_policy": "script-src 'self' https://apis.google.com/; object-src 'self'",
   "manifest_version": 2
 }
