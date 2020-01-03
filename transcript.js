@@ -45,6 +45,9 @@ class Transcript {
     return transciptXML
   }
   RemoveSpecialChars(str) {
-    return str.replace(/[^a-zA-Z0-9]/g, " ").replace(/\s\s+/g, " ")
+    return str
+      .replace(/[^a-zA-Z0-9]/g, " ")
+      .replace(/\s\s+/g, " ")
+      .toLowerCase()
   }
 }
