@@ -1,15 +1,8 @@
-// Add gapi script here???
-// let gapiRef = document.createElement("script")
-// gapiRef.setAttribute("type", "text/javascript")
-// gapiRef.setAttribute("src", "https://apis.google.com/js/api.js")
-
 //Need to get the inner text of the textarea
 let searchContent = null
 document.querySelector("button").addEventListener("click", function() {
   searchContent = document.getElementById("searchContent").value
 })
-
-const gAPI = "AIzaSyD-XYTzGnBj6t8b1qn7DV3uYgR0Tt0-Jk0"
 
 //Get the auth token and send a request
 document.querySelector("button").addEventListener("click", async function() {
@@ -29,7 +22,11 @@ document.querySelector("button").addEventListener("click", async function() {
     let youtubeUrl = "https://video.google.com/timedtext?lang=en&v=LZM9YdO_QKk"
     try {
       let response = await getReponse(corsProxy + youtubeUrl, initial)
-      response.text().then(data => console.log(data))
+      response.text().then(transcript => {
+        let timedTranscript = new Transcript(transcript)
+        let searchResults = timedTranscript.FindQuery(searchContent)
+        console.log(searchResults)
+      })
     } catch (err) {
       console.log(err)
     }

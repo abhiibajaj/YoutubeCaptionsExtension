@@ -6,7 +6,7 @@ class Transcript {
     this.entireTranscript = Object.entries(this.TimeStampTranscipt(transcript))
   }
 
-  FindEntry(searchQuery) {
+  FindQuery(searchQuery) {
     let searchTimeStamps = []
     for (const [text, timestamp] of this.entireTranscript) {
       if (text.includes(searchQuery)) {
@@ -47,11 +47,4 @@ class Transcript {
   RemoveSpecialChars(str) {
     return str.replace(/[^a-zA-Z0-9]/g, " ").replace(/\s\s+/g, " ")
   }
-}
-
-let button = document.getElementById("button")
-button.onclick = () => {
-  let transcriptSample = new Transcript(sample)
-  let query = ["few"]
-  console.log(transcriptSample.FindEntry(query))
 }
