@@ -33,7 +33,7 @@ class Transcript {
     let timeStamppedTranscript = {}
     textNodes.forEach(textNode => {
       let text = this.RemoveSpecialChars(textNode.innerHTML)
-      let timestamp = textNode.getAttribute("start")
+      let timestamp = Math.floor(textNode.getAttribute("start"))
       timeStamppedTranscript[text] = timestamp
     })
     return timeStamppedTranscript

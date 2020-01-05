@@ -35,7 +35,7 @@ document.querySelector("button").addEventListener("click", async function() {
         .then(transcript => {
           let timedTranscript = new Transcript(transcript)
           let searchResults = timedTranscript.FindQuery(searchContent)
-          console.log(searchResults)
+          addSearchItemsToPopup(tab, searchResults)
         })
     })
   } else {
@@ -43,15 +43,24 @@ document.querySelector("button").addEventListener("click", async function() {
   }
 })
 
-async function getYoutubeId() {
-  let video_id = ""
-  chrome.tabs.query({ currentWindow: true, active: true }, tabs => {
-    tab = tabs[0].url
-    video_id = tab.split("v=")[1]
-    let ampersandPosition = video_id.indexOf("&")
-    if (ampersandPosition != -1) {
-      video_id += video_id.substring(0, ampersandPosition)
-    }
+function convertResponseToText(response) {
+  return new Promise(resolve => {
+    response.text()
+    resolve()
   })
-  return video_id
+}
+
+let addSearchItemsToPopup = (youtubeUrl, searchResults) => {
+  let matcheshtml = document.getElementById("listmatches")
+  searchResults.forEach(result => {
+    let timedUrl = youtubeUrl + "&t=" + result + "s"
+    let listElement = document.createElement("li")
+
+    let linkElement = document.createElement("a")
+    linkElement.setAttribute("href", timedUrl)
+    linkElement.innerText = timedUrl
+    listElement.appendChild(linkElement)
+
+    matcheshtml.appendChild(listElement)
+  })
 }
