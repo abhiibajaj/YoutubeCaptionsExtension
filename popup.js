@@ -20,6 +20,8 @@ document.querySelector("button").addEventListener("click", async function() {
       ampersandPosition = tab.indexOf("&")
       if (ampersandPosition != -1) {
         youtubeVideo = tab.substring(0, ampersandPosition)
+      } else {
+        youtubeVideo = tab
       }
 
       //Need to get the youtube id from the current tab
@@ -75,6 +77,7 @@ let addSearchItemsToPopup = (youtubeUrl, searchResults) => {
 
 let refreshList = matcheshtml => {
   matcheshtml.innerHtml = ""
+  matcheshtml.innerText = ""
 }
 
 let redirectToNewUrl = event => {
