@@ -35,14 +35,28 @@ document.querySelector("button").addEventListener("click", async function() {
       }
 
       let corsProxy = "https://cors-anywhere.herokuapp.com/"
-      let youtubePlaceholder = "https://video.google.com/timedtext?lang=en&v="
+      let youtubePlaceholder = "https://www.youtube.com/watch?v="
       let youtubeUrl = youtubePlaceholder + youtubeVideoId
       fetch(corsProxy + youtubeUrl, initial)
         .then(response => response.text())
-        .then(transcript => {
-          let timedTranscript = new Transcript(transcript)
-          let searchResults = timedTranscript.FindQuery(searchContent)
-          addSearchItemsToPopup(youtubeVideo, searchResults)
+        .then(responseText => {
+          let sanitizedResponse = responseText
+            .replace("\\u0026", "&")
+            .replace("\\", "")
+            .split('"captions":')
+
+          let captionsTracks = JSON.parse(
+            sanitizedResponse[1].split(',"videoDetails')[0].replace("\n", "")
+          )["playerCaptionsTracklistRenderer"]["captionTracks"]
+
+          let englishUrl = getEnglishLanguageUrl(captionsTracks)
+          fetch(corsProxy + englishUrl, initial)
+            .then(response => response.text())
+            .then(transcript => {
+              let timedTranscript = new Transcript(transcript)
+              let searchResults = timedTranscript.FindQuery(searchContent)
+              addSearchItemsToPopup(youtubeVideo, searchResults)
+            })
         })
     })
   } else {
@@ -50,12 +64,8 @@ document.querySelector("button").addEventListener("click", async function() {
   }
 })
 
-// Not sure how to make this work
-function convertResponseToText(response) {
-  return new Promise(resolve => {
-    response.text()
-    resolve()
-  })
+let getEnglishLanguageUrl = captionsTracks => {
+  return captionsTracks.find(track => track.languageCode === "en").baseUrl
 }
 
 let addSearchItemsToPopup = (youtubeUrl, searchResults) => {
